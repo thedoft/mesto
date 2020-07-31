@@ -1,0 +1,6 @@
+.element__title-container {
+  width: 240px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
