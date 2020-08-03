@@ -1,6 +1,16 @@
+@import url(./_place/logo_place_header.css);
+
 .logo {
   width: 144px;
   height: 34px;
   background-image: url(../../images/logo.svg);
   background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media screen and (max-width: 619px) {
+  .logo {
+    width: 104px;
+    height: 24px;
+    }
 }

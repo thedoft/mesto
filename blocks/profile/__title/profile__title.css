@@ -6,3 +6,15 @@
   color: #fff;
   margin-right: 17px;
 }
+
+@media screen and (max-width: 767px) {
+  .profile__title {
+    font-size: 27px;
+    }
+}
+
+@media screen and (max-width: 619px) {
+  .profile__title {
+    margin-right: 7px;
+    }
+}
