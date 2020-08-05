@@ -23,13 +23,13 @@
 @media screen and (max-width: 425px) {
   .popup__close-button {
     top: -42px;
-    right: 0;
+    right: -20px;
   }
 }
 
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 425px) {
   .popup__close-button {
-    top: -21px;
-    right: -42px
+    top: 0;
+    right: -42px;
   }
 }

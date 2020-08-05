@@ -18,11 +18,3 @@
     padding: 20px 24px 24px;
   }
 }
-
-@media screen and (max-height: 600px) {
-  .popup__container {
-    height: 75vh;
-    max-height: 345px;
-    min-height: 260px;
-  }
-}
