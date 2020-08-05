@@ -2,5 +2,10 @@
   padding: 0;
   border: none;
   margin: 0 0 48px;
-  display: flex;
+}
+
+@media screen and (max-width: 619px) {
+  .popup__info {
+    margin-bottom: 32px;
+  }
 }

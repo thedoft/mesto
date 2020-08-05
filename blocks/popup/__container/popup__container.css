@@ -12,12 +12,17 @@
 
 @media screen and (max-width: 619px) {
   .popup__container {
-    width: 350px;
+    max-width: 360px;
+    min-width: 282px;
+    width: 75vw;
+    padding: 20px 24px 24px;
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-height: 600px) {
   .popup__container {
-    width: 282px;
+    height: 75vh;
+    max-height: 345px;
+    min-height: 260px;
   }
 }
