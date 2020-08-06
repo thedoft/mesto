@@ -10,11 +10,15 @@
   text-align: center;
   min-height: 50px;
   opacity: 1;
+  -webkit-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
 }
 
 .popup__save-button:hover {
   opacity: .8;
+  -webkit-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
   cursor: pointer;
 }

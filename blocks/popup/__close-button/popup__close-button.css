@@ -9,13 +9,19 @@
   background-color: rgba(0, 0, 0, 0);
   background-image: url(../../../images/close-button.svg);
   background-position: center;
-  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+          transform: rotate(45deg);
   opacity: 1;
+  -webkit-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
 }
 
 .popup__close-button:hover {
   opacity: .6;
+  -webkit-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
   cursor: pointer;
 }

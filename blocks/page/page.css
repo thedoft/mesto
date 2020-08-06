@@ -5,8 +5,16 @@
   font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
   -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }

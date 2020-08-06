@@ -3,7 +3,7 @@
   width: 100%;
   min-height: 74px;
   padding: 45px 0 0;
-  border-bottom: 1px solid rgba(84, 84, 84, .7);;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 
 @media screen and (max-width: 919px) {
@@ -14,6 +14,7 @@
 
 @media screen and (max-width: 619px) {
   .header {
+    min-height: 56px;
     padding-top: 28px;
     }
 }

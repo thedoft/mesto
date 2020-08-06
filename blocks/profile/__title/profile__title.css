@@ -6,7 +6,8 @@
   color: #fff;
   margin-right: 17px;
   overflow: hidden;
-  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 450px;
 }
@@ -27,6 +28,6 @@
 @media screen and (max-width: 619px) {
   .profile__title {
     margin-right: 7px;
-    max-width: 282px;
+    max-width: 260px;
     }
 }

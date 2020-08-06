@@ -5,11 +5,14 @@
   height: 50px;
   background-color: #000;
   border: #fff solid 2px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   background-image: url(../../../images/add-button.svg);
   background-position: center;
   background-repeat: no-repeat;
   opacity: 1;
+  -webkit-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
 }
 
@@ -22,6 +25,8 @@
 
 .profile__add-button:hover {
   opacity: .6;
+  -webkit-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
   cursor: pointer;
 }

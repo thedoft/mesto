@@ -27,6 +27,8 @@ function saveProfile (evt) {
 
   profileName.textContent = inputs[0].value;
   profileJob.textContent = inputs[1].value;
+
+  closePopup();
 }
 
 form.addEventListener('submit', saveProfile);

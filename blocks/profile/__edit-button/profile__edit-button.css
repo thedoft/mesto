@@ -7,8 +7,11 @@
   background-position: center;
   background-repeat: no-repeat;
   border: #fff solid 1px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   opacity: 1;
+  -webkit-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
 }
 
@@ -21,6 +24,8 @@
 
 .profile__edit-button:hover {
   opacity: .6;
+  -webkit-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
   cursor: pointer;
 }

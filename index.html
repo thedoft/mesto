@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title lang="en">Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
   <meta name="description" content="Интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки">
   <meta name="keywords" content="Сервис фотографий, Жак-Ив Кусто">
   <meta name="author" content="Игорь Шишлов">
+  <title lang="en">Mesto</title>
+  <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body>
   <div class="page">
     <header class="header">
-      <div class="logo logo_place_header"></div>
+      <img src="./images/logo.svg" class="logo" alt="Логотип сервиса">
     </header>
 
     <main class="content">
@@ -21,22 +21,11 @@
         <div class="profile__info">
           <div class="profile__title-container">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button"></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
         <button class="profile__add-button"></button>
-        <div class="popup">
-          <form action="" class="popup__container">
-            <fieldset class="popup__info">
-              <legend class="popup__title">Редактирование профиля</legend>
-              <input type="text" class="popup__input">
-              <input type="text" class="popup__input">
-            </fieldset>
-            <button class="popup__save-button">Сохранить</button>
-            <button class="popup__close-button"></button>
-          </form>
-        </div>
       </section>
 
       <section class="elements">
@@ -44,42 +33,42 @@
           <li class="element">
             <img src="./images/usa.jpg" alt="Фотография гор в США" class="element__image">
             <div class="element__title-container">
-              <p class="element__title">США</p>
-              <button class="element__like-button"></button>
+              <h2 class="element__title">США</h2>
+              <button type="button" class="element__like-button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/barcelona.jpg" alt="Фотография Барселоны" class="element__image">
             <div class="element__title-container">
-              <p class="element__title">Барселона</p>
+              <h2 class="element__title">Барселона</h2>
               <button class="element__like-button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/bayern.jpg" alt="Фотография Баварии" class="element__image">
             <div class="element__title-container">
-              <p class="element__title">Бавария</p>
+              <h2 class="element__title">Бавария</h2>
               <button class="element__like-button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/indonesia.jpg" alt="Фотография Индонезии" class="element__image">
             <div class="element__title-container">
-              <p class="element__title">Индонезия</p>
+              <h2 class="element__title">Индонезия</h2>
               <button class="element__like-button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/paris.jpg" alt="Фотография Парижа" class="element__image">
             <div class="element__title-container">
-              <p class="element__title">Париж</p>
+              <h2 class="element__title">Париж</h2>
               <button class="element__like-button"></button>
             </div>
           </li>
           <li class="element">
             <img src="./images/san-francisco.jpg" alt="Фотография Сан-Франциско" class="element__image">
             <div class="element__title-container">
-              <p class="element__title">Сан-Франциско</p>
+              <h2 class="element__title">Сан-Франциско</h2>
               <button class="element__like-button"></button>
             </div>
           </li>
@@ -92,6 +81,18 @@
     </footer>
   </div>
 
-  <script src="./pages/index.js"></script>
+  <div class="popup">
+    <form name="form" class="popup__container">
+      <fieldset class="popup__info">
+        <legend class="popup__title">Редактирование профиля</legend>
+        <input type="text" class="popup__input popup__input_type_text">
+        <input type="text" class="popup__input popup__input_type_text">
+      </fieldset>
+      <button type="submit" class="popup__save-button">Сохранить</button>
+      <button type="reset" class="popup__close-button"></button>
+    </form>
+  </div>
+
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
