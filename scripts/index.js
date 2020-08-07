@@ -6,13 +6,15 @@ let editButton = profile.querySelector('.profile__edit-button');
 let popup = document.querySelector('.popup');
 let form = popup.querySelector('.popup__container');
 let closeButton = popup.querySelector('.popup__close-button');
-let inputs = popup.querySelectorAll('.popup__input');
+let inputName = popup.querySelector('.popup__input_type_name');
+let inputJob = popup.querySelector('.popup__input_type_job');
+
 
 function openPopup() {
   popup.classList.add('popup_opened');
 
-  inputs[0].value = profileName.textContent;
-  inputs[1].value = profileJob.textContent;
+  inputName.value = profileName.textContent;
+  inputJob.value = profileJob.textContent;
 }
 
 function closePopup() {
@@ -25,8 +27,8 @@ closeButton.addEventListener('click', closePopup);
 function saveProfile (evt) {
   evt.preventDefault();
 
-  profileName.textContent = inputs[0].value;
-  profileJob.textContent = inputs[1].value;
+  profileName.textContent = inputName.value;
+  profileJob.textContent = inputJob.value;
 
   closePopup();
 }
