@@ -24,4 +24,4 @@ https://thedoft.github.io/mesto/index.html
 
 ### Инструкция по использованию
 
-В проекте применяются HTML5, CSS3 и JS.
+В проекте применяются __HTML5__, __CSS3__ и __JavaScript__.
