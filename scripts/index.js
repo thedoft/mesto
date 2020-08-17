@@ -29,7 +29,6 @@ function saveProfile (evt) {
 
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
-
   closePopup();
 }
 
