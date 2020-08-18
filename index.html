@@ -30,48 +30,18 @@
 
       <section class="elements">
         <ul class="elements__list">
-          <li class="element">
-            <img src="./images/usa.jpg" alt="Фотография гор в США" class="element__image">
-            <div class="element__title-container">
-              <h2 class="element__title">США</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/barcelona.jpg" alt="Фотография Барселоны" class="element__image">
-            <div class="element__title-container">
-              <h2 class="element__title">Барселона</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/bayern.jpg" alt="Фотография Баварии" class="element__image">
-            <div class="element__title-container">
-              <h2 class="element__title">Бавария</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/indonesia.jpg" alt="Фотография Индонезии" class="element__image">
-            <div class="element__title-container">
-              <h2 class="element__title">Индонезия</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/paris.jpg" alt="Фотография Парижа" class="element__image">
-            <div class="element__title-container">
-              <h2 class="element__title">Париж</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img src="./images/san-francisco.jpg" alt="Фотография Сан-Франциско" class="element__image">
-            <div class="element__title-container">
-              <h2 class="element__title">Сан-Франциско</h2>
-              <button type="button" class="element__like-button"></button>
-            </div>
-          </li>
+
+          <template id="element">
+            <li class="element">
+              <img class="element__image">
+              <div class="element__title-container">
+                <h2 class="element__title"></h2>
+                <button type="button" class="element__like-button"></button>
+              </div>
+              <button type="button" class="element__trash-button"></button>
+            </li>
+          </template>
+
         </ul>
       </section>
     </main>
@@ -82,13 +52,25 @@
   </div>
 
   <div class="popup">
-    <form name="form" class="popup__container">
+    <form name="edit-profile-form" class="popup__container">
       <fieldset class="popup__info">
         <legend class="popup__title">Редактирование профиля</legend>
         <input type="text" class="popup__input popup__input_type_name">
         <input type="text" class="popup__input popup__input_type_job">
       </fieldset>
       <button type="submit" class="popup__save-button">Сохранить</button>
+      <button type="reset" class="popup__close-button"></button>
+    </form>
+  </div>
+
+  <div class="popup">
+    <form name="add-card-form" class="popup__container">
+      <fieldset class="popup__info">
+        <legend class="popup__title">Новое место</legend>
+        <input type="text" class="popup__input popup__input_type_place" placeholder="Название">
+        <input type="text" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку">
+      </fieldset>
+      <button type="submit" class="popup__save-button">Создать</button>
       <button type="reset" class="popup__close-button"></button>
     </form>
   </div>

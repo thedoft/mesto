@@ -2,8 +2,10 @@
 @import url(./__title-container/element__title-container.css);
 @import url(./__title/element__title.css);
 @import url(./__like-button/element__like-button.css);
+@import url(./__trash-button/element__trash-button.css);
 
 .element {
+  position: relative;
   width: 100%;
   background-color: #fff;
   border-radius: 10px;

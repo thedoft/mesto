@@ -3,7 +3,7 @@
   min-height: 18px;
   padding: 0;
   border: none;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0);
   background-image: url(../../../images/like-button.svg);
   background-size: contain;
   background-repeat: no-repeat;

@@ -14,6 +14,10 @@
   margin: 0;
 }
 
+.popup__input::placeholder {
+  color: #C4C4C4;
+}
+
 @media screen and (max-width: 619px) {
   .popup__input_type_text {
     font-size: 12px;
