@@ -51,29 +51,19 @@
     </footer>
   </div>
 
-  <div class="popup">
-    <form name="edit-profile-form" class="popup__container">
-      <fieldset class="popup__info">
-        <legend class="popup__title">Редактирование профиля</legend>
-        <input type="text" class="popup__input popup__input_type_name">
-        <input type="text" class="popup__input popup__input_type_job">
-      </fieldset>
-      <button type="submit" class="popup__save-button">Сохранить</button>
-      <button type="reset" class="popup__close-button"></button>
-    </form>
-  </div>
-
-  <div class="popup">
-    <form name="add-card-form" class="popup__container">
-      <fieldset class="popup__info">
-        <legend class="popup__title">Новое место</legend>
-        <input type="text" class="popup__input popup__input_type_place" placeholder="Название">
-        <input type="text" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку">
-      </fieldset>
-      <button type="submit" class="popup__save-button">Создать</button>
-      <button type="reset" class="popup__close-button"></button>
-    </form>
-  </div>
+  <template id="popup">
+    <div class="popup">
+      <form name="form" class="popup__container">
+        <fieldset class="popup__info">
+          <legend class="popup__title"></legend>
+          <input type="text" class="popup__input">
+          <input type="text" class="popup__input">
+        </fieldset>
+        <button type="submit" class="popup__save-button"></button>
+        <button type="reset" class="popup__close-button"></button>
+      </form>
+    </div>
+  </template>
 
   <script src="./scripts/index.js"></script>
 </body>
