@@ -38,11 +38,18 @@ function addCard(item) {
   element.querySelector('.element__image').alt = item.name;
   element.querySelector('.element__title').textContent = item.name;
 
-  // выбор кнопки like, функция, делающая ее активной/неактивной при нажатии и добавление функции кнопке
+  // выбор кнопки like и добавление кнопке обработчика событий, делающего ее активной/неактивной при нажатии
   const likeButton = element.querySelector('.element__like-button');
 
   likeButton.addEventListener('click', function(evt) {
     evt.target.classList.toggle('element__like-button_active');
+  });
+
+  // выбор кнопки удаления карточки и обработчик события для нее
+  const trashButton = element.querySelector('.element__trash-button');
+
+  trashButton.addEventListener('click', function(evt) {
+    evt.target.closest('.element').remove();
   });
 
   return element;
@@ -99,7 +106,8 @@ function openAddPopup() {
 // функция закрытия попапа
 function closePopup() {
   popup.forEach(item => {
-    item.classList.remove('popup_opened')});
+    item.classList.remove('popup_opened');
+  });
 };
 
 // добавление слушателя событий на кнопки редактирования профиля, добавления карточки и закрытия попапа
@@ -109,9 +117,6 @@ addButton.addEventListener('click', openAddPopup);
 const closeButton = document.querySelectorAll('.popup__close-button');
 closeButton.forEach(item => {
   item.addEventListener('click', closePopup)});
-
-// выбор форм
-const form = document.querySelectorAll('.popup__container');
 
 // функция-обработчик события клика на кнопку попапа Сохранить
 function saveProfile (evt) {
@@ -137,6 +142,13 @@ function newCard (evt) {
   closePopup();
 };
 
+// выбор форм
+const form = document.querySelectorAll('.popup__container');
+const editForm = form[0];
+const addForm = form[1];
+
 // добавление слушателей событий на формы
-form[0].addEventListener('submit', saveProfile);
-form[1].addEventListener('submit', newCard);
+editForm.addEventListener('submit', saveProfile);
+addForm.addEventListener('submit', newCard);
+
+
