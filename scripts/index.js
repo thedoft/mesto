@@ -26,12 +26,12 @@ const initialCards = [
   }
 ];
 
-// выбор списка карточек, самой карточки и заготовки ее верстки
+// выбор списка карточек и заготовки верстки карточки
 const elementsList = document.querySelector('.elements__list');
 const elementTemplate = document.querySelector('#element').content;
 
-// добавление карточек "из коробки" в список
-initialCards.forEach(item => {
+// функция добавления карточки
+function addCard(item) {
   const element = elementTemplate.cloneNode(true);
 
   element.querySelector('.element__image').src = item.link;
@@ -45,7 +45,12 @@ initialCards.forEach(item => {
     evt.target.classList.toggle('element__like-button_active');
   });
 
-  elementsList.append(element);
+  return element;
+}
+
+// добавление карточек "из коробки"
+initialCards.forEach(item => {
+  elementsList.append(addCard(item));
 });
 
 // выбор элементов секции profile
@@ -59,29 +64,36 @@ const addButton = profile.querySelector('.profile__add-button');
 const page = document.querySelector('.page');
 const popupTemplate = document.querySelector('#popup').content;
 
-const editPopup = popupTemplate.cloneNode(true);
-editPopup.querySelector('.popup__title').textContent = 'Редактирование профиля';
-editPopup.querySelector('.popup__save-button').textContent = 'Сохранить';
+const editPopupElement = popupTemplate.cloneNode(true);
+editPopupElement.querySelector('.popup__title').textContent = 'Редактирование профиля';
+editPopupElement.querySelector('.popup__save-button').textContent = 'Сохранить';
 
-const addPopup = popupTemplate.cloneNode(true);
-addPopup.querySelector('.popup__title').textContent = 'Новое место';
-addPopup.querySelector('.popup__save-button').textContent = 'Создать';
-addPopup.querySelectorAll('.popup__input')[0].placeholder = 'Название';
-addPopup.querySelectorAll('.popup__input')[1].placeholder = 'Ссылка на картинку';
+const addPopupElement = popupTemplate.cloneNode(true);
+addPopupElement.querySelector('.popup__title').textContent = 'Новое место';
+addPopupElement.querySelector('.popup__save-button').textContent = 'Создать';
+addPopupElement.querySelectorAll('.popup__input')[0].placeholder = 'Название';
+addPopupElement.querySelectorAll('.popup__input')[1].placeholder = 'Ссылка на картинку';
 
-page.after(editPopup, addPopup);
+page.after(editPopupElement, addPopupElement);
+
+// запись попапов в отдельные переменные
 const popup = document.querySelectorAll('.popup');
+const editPopup = popup[0];
+const addPopup = popup[1];
 
 // функции открытия попапа
 function openEditPopup() {
-  popup[0].classList.add('popup_opened');
+  editPopup.classList.add('popup_opened');
 
-  popup[0].querySelectorAll('.popup__input')[0].value = profileName.textContent;
-  popup[0].querySelectorAll('.popup__input')[1].value = profileJob.textContent;
+  editPopup.querySelectorAll('.popup__input')[0].value = profileName.textContent;
+  editPopup.querySelectorAll('.popup__input')[1].value = profileJob.textContent;
 };
 
 function openAddPopup() {
-  popup[1].classList.add('popup_opened');
+  addPopup.classList.add('popup_opened');
+
+  addPopup.querySelectorAll('.popup__input')[0].value = '';
+  addPopup.querySelectorAll('.popup__input')[1].value = '';
 };
 
 // функция закрытия попапа
@@ -105,21 +117,26 @@ const form = document.querySelectorAll('.popup__container');
 function saveProfile (evt) {
   evt.preventDefault();
 
-  profileName.textContent = popup[0].querySelectorAll('.popup__input')[0].value;
-  profileJob.textContent = popup[0].querySelectorAll('.popup__input')[1].value;
+  profileName.textContent = editPopup.querySelectorAll('.popup__input')[0].value;
+  profileJob.textContent = editPopup.querySelectorAll('.popup__input')[1].value;
 
   closePopup();
 };
 
 // функция-обработчик события клика на кнопку попапа Создать
-function addCard (evt) {
+function newCard (evt) {
   evt.preventDefault();
 
+  let item = {
+    name: addPopup.querySelectorAll('.popup__input')[0].value,
+    link: addPopup.querySelectorAll('.popup__input')[1].value
+  };
 
+  elementsList.prepend(addCard(item));
 
   closePopup();
 };
 
 // добавление слушателей событий на формы
 form[0].addEventListener('submit', saveProfile);
-form[1].addEventListener('submit', addCard);
+form[1].addEventListener('submit', newCard);
