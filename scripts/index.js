@@ -51,6 +51,7 @@ function newCard(item) {
   const elementPopup = element.querySelector('.popup_type_image');
   const elementPopupImage = elementPopup.querySelector('.popup__image');
   const elementPopupSubtitle = elementPopup.querySelector('.popup__subtitle');
+  const elementPopupCloseButton = elementPopup.querySelector('.popup__close-button');
 
   elementImage.addEventListener('click', () => {
     elementPopupImage.src = elementImage.src;
@@ -59,6 +60,9 @@ function newCard(item) {
 
     elementPopup.classList.add('popup_opened');
   });
+
+  // слушатель для кнопки Закрыть попапа с картинкой
+  elementPopupCloseButton.addEventListener('click', closePopup);
 
   // выбор кнопки удаления карточки и обработчик события для нее
   const trashButton = element.querySelector('.element__trash-button');
@@ -112,17 +116,16 @@ function openPopup(popup) {
 editButton.addEventListener('click', openPopup(editPopup));
 addButton.addEventListener('click', openPopup(addPopup));
 
-// функция закрытия попапа и слушатель для кнопки закрыть
-function closePopup() {
-  popup.forEach(item => {
-    item.classList.remove('popup_opened');
-  });
+// функция закрытия попапа и слушатели для кнопок Закрыть
+function closePopup(evt) {
+  evt.target.closest('.popup').classList.remove('popup_opened');
 };
 
-const closeButton = document.querySelectorAll('.popup__close-button');
-closeButton.forEach(item => {
-  item.addEventListener('click', closePopup);
-});
+const editPopupCloseButton = editPopup.querySelector('.popup__close-button');
+editPopupCloseButton.addEventListener('click', closePopup);
+
+const addPopupCloseButton = addPopup.querySelector('.popup__close-button');
+addPopupCloseButton.addEventListener('click', closePopup);
 
 // функция-обработчик события клика на кнопку попапа Сохранить
 function saveProfile (evt) {
