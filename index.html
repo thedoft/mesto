@@ -40,6 +40,13 @@
               </div>
               <button type="button" class="element__trash-button"></button>
             </li>
+            <div class="popup popup_type_image">
+              <div class="popup__container">
+                <img class="popup__image">
+                <p class="popup__subtitle"></p>
+                <button type="reset" class="popup__close-button"></button>
+              </div>
+            </div>
           </template>
 
         </ul>
@@ -51,15 +58,15 @@
     </footer>
   </div>
 
-  <template id="popup">
-    <div class="popup">
-      <form name="form" class="popup__container">
+  <template id="form-popup">
+    <div class="popup popup_type_form">
+      <form name="form" class="popup__form">
         <fieldset class="popup__info">
           <legend class="popup__title"></legend>
           <input type="text" class="popup__input">
           <input type="text" class="popup__input">
         </fieldset>
-        <button type="submit" class="popup__save-button"></button>
+        <button type="submit" class="popup__submit-button"></button>
         <button type="reset" class="popup__close-button"></button>
       </form>
     </div>

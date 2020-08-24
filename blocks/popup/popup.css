@@ -1,15 +1,20 @@
-@import url(./__container/popup__container.css);
+@import url(./__form/popup__form.css);
 @import url(./__title/popup__title.css);
 @import url(./__info/popup__info.css);
 @import url(./__input/popup__input.css);
-@import url(./__save-button/popup__save-button.css);
+@import url(./__submit-button/popup__submit-button.css);
 @import url(./__close-button/popup__close-button.css);
+@import url(./__container/popup__container.css);
+@import url(./__image/popup__image.css);
+@import url(./__subtitle/popup__subtitle.css);
+@import url(./_type/popup_type_form.css);
+@import url(./_type/popup_type_image.css);
 
 .popup {
   position: fixed;
   top: 0px;
   left: 0px;
-  display: none;
+  display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -18,5 +23,7 @@
           justify-content: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, .5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .75s, visibility .75s linear;
 }

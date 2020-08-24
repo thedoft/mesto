@@ -19,9 +19,10 @@
 }
 
 @media screen and (max-width: 619px) {
-  .popup__input_type_text {
+  .popup__input {
     font-size: 12px;
     line-height: 15px;
-    padding-bottom: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
   }
 }
