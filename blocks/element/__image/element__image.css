@@ -7,4 +7,11 @@
      object-position: center;
   border-radius: 10px 10px 0 0;
   margin-bottom: 25px;
+  transition: box-shadow .5s ease;
+}
+
+.element__image:hover {
+  cursor: pointer;
+  box-shadow: #000 0 0 10px ;
+  transition: box-shadow .5s ease;
 }

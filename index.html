@@ -58,19 +58,29 @@
     </footer>
   </div>
 
-  <template id="form-popup">
-    <div class="popup popup_type_form">
-      <form name="form" class="popup__form">
-        <fieldset class="popup__info">
-          <legend class="popup__title"></legend>
-          <input type="text" class="popup__input">
-          <input type="text" class="popup__input">
-        </fieldset>
-        <button type="submit" class="popup__submit-button"></button>
-        <button type="reset" class="popup__close-button"></button>
-      </form>
-    </div>
-  </template>
+  <div class="popup popup_type_edit-profile">
+    <form name="form" class="popup__form">
+      <fieldset class="popup__info">
+        <legend class="popup__title">Редактирование профиля</legend>
+        <input type="text" class="popup__input popup__input_type_name">
+        <input type="text" class="popup__input popup__input_type_job">
+      </fieldset>
+      <button type="submit" class="popup__submit-button">Сохранить</button>
+      <button type="reset" class="popup__close-button"></button>
+    </form>
+  </div>
+
+  <div class="popup popup_type_add-card">
+    <form name="form" class="popup__form">
+      <fieldset class="popup__info">
+        <legend class="popup__title">Новое место</legend>
+        <input type="text" class="popup__input popup__input_type_place"  placeholder = 'Название'>
+        <input type="text" class="popup__input popup__input_type_link" placeholder = 'Ссылка на картинку'>
+      </fieldset>
+      <button type="submit" class="popup__submit-button">Создать</button>
+      <button type="reset" class="popup__close-button"></button>
+    </form>
+  </div>
 
   <script src="./scripts/index.js"></script>
 </body>
