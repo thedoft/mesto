@@ -52,10 +52,6 @@ function newCard(item) {
   const elementPopupImage = elementPopup.querySelector('.popup__image');
   const elementPopupSubtitle = elementPopup.querySelector('.popup__subtitle');
 
-  // elementPopupImage.src = elementImage.src;
-  // elementPopupImage.alt = elementImage.alt;
-  // elementPopupSubtitle.textContent = elementTitle.textContent;
-
   elementImage.addEventListener('click', () => {
     elementPopupImage.src = elementImage.src;
     elementPopupImage.alt = elementImage.alt;
