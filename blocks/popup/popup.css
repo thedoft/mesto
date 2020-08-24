@@ -7,8 +7,6 @@
 @import url(./__container/popup__container.css);
 @import url(./__image/popup__image.css);
 @import url(./__subtitle/popup__subtitle.css);
-@import url(./_type/popup_type_form.css);
-@import url(./_type/popup_type_image.css);
 
 .popup {
   position: fixed;
@@ -23,6 +21,7 @@
           justify-content: center;
   width: 100vw;
   height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
   visibility: hidden;
   opacity: 0;
   transition: opacity .75s, visibility .75s linear;
