@@ -52,9 +52,7 @@ function newCard(item) {
   elementPopup.querySelector('.popup__image').src = elementImage.src;
   elementPopup.querySelector('.popup__image').alt = elementImage.alt;
   elementPopup.querySelector('.popup__subtitle').textContent = elementTitle.textContent;
-  elementImage.addEventListener('click', () => {
-    elementPopup.classList.add('popup_opened');
-  });
+  elementImage.addEventListener('click', openPopup(elementPopup));
 
   // выбор кнопки удаления карточки и обработчик события для нее
   const trashButton = element.querySelector('.element__trash-button');
@@ -100,24 +98,24 @@ const formPopup = document.querySelectorAll('.popup_type_form');
 const editPopup = formPopup[0];
 const addPopup = formPopup[1];
 
-// функции открытия попапа
-function openEditPopup() {
-  editPopup.classList.add('popup_opened');
+// функция открытия попапа с формой
+function openPopup(popup) {
+  return function () {
+    popup.classList.add('popup_opened');
 
-  editPopup.querySelectorAll('.popup__input')[0].value = profileName.textContent;
-  editPopup.querySelectorAll('.popup__input')[1].value = profileJob.textContent;
-};
-
-function openAddPopup() {
-  addPopup.classList.add('popup_opened');
-
-  addPopup.querySelectorAll('.popup__input')[0].value = '';
-  addPopup.querySelectorAll('.popup__input')[1].value = '';
+    if (popup === editPopup) {
+      popup.querySelectorAll('.popup__input')[0].value = profileName.textContent;
+      popup.querySelectorAll('.popup__input')[1].value = profileJob.textContent;
+    } else if (popup === addPopup) {
+      popup.querySelectorAll('.popup__input')[0].value = '';
+      popup.querySelectorAll('.popup__input')[1].value = '';
+    };
+  };
 };
 
 // добавление слушателя событий на кнопки редактирования профиля, добавления карточки
-editButton.addEventListener('click', openEditPopup);
-addButton.addEventListener('click', openAddPopup);
+editButton.addEventListener('click', openPopup(editPopup));
+addButton.addEventListener('click', openPopup(addPopup));
 
 // функция закрытия попапа и слушатель для кнопки закрыть
 function closePopup() {
