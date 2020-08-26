@@ -124,7 +124,7 @@ const addPopupCloseButton = addPopup.querySelector('.popup__close-button');
 addPopupCloseButton.addEventListener('click', closePopup);
 
 // функция-обработчик события клика на кнопку попапа Сохранить
-function saveProfile (evt) {
+function saveProfile(evt) {
   evt.preventDefault();
 
   profileName.textContent = editPopupName.value;
@@ -134,7 +134,7 @@ function saveProfile (evt) {
 }
 
 // функция-обработчик события клика на кнопку попапа Создать
-function addCard (evt) {
+function addCard(evt) {
   evt.preventDefault();
 
   const item = {
@@ -150,8 +150,8 @@ function addCard (evt) {
 }
 
 // выбор форм
-const editForm = editPopup.querySelector('form[name=form]');
-const addForm = addPopup.querySelector('form[name=form]');
+const editForm = document.forms.edit-form;
+const addForm = document.forms.add-form;
 
 // добавление слушателей событий на формы
 editForm.addEventListener('submit', saveProfile);
