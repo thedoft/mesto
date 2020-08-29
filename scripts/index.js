@@ -59,7 +59,11 @@ function newCard(item) {
     elementPopupSubtitle.textContent = elementTitle.textContent;
 
     elementPopup.classList.add('popup_opened');
+
+    // добавление слушателя для закрытия попапа нажатием на Esc
+    document.body.addEventListener('keyup', closeByEsc);
   });
+
 
   // слушатель для кнопки Закрыть попапа с картинкой
   elementPopupCloseButton.addEventListener('click', closePopup);
@@ -105,6 +109,9 @@ function openPopup(popup) {
       addPopupLink.value = '';
     }
     popup.classList.add('popup_opened');
+
+    // добавление слушателя для закрытия попапа нажатием на Esc
+    document.body.addEventListener('keyup', closeByEsc);
   }
 }
 
@@ -115,6 +122,7 @@ addButton.addEventListener('click', openPopup(addPopup));
 // функция закрытия попапа и слушатели для кнопок Закрыть
 function closePopup(evt) {
   evt.target.closest('.popup').classList.remove('popup_opened');
+  document.body.removeEventListener('keyup', closeByEsc);
 }
 
 const editPopupCloseButton = editPopup.querySelector('.popup__close-button');
@@ -150,9 +158,27 @@ function addCard(evt) {
 }
 
 // выбор форм
-const editForm = document.forms.edit-form;
-const addForm = document.forms.add-form;
+const editForm = document.forms['edit-form'];
+const addForm = document.forms['add-form'];
 
 // добавление слушателей событий на формы
 editForm.addEventListener('submit', saveProfile);
 addForm.addEventListener('submit', addCard);
+
+// выберем все попапы и добавим им возможность закрытия кликом на оверлей
+const popupList = Array.from(document.querySelectorAll('.popup'));
+popupList.forEach(popup => {
+  popup.addEventListener('click', evt => {
+    if (evt.target === evt.currentTarget) {
+      closePopup(evt);
+    }
+  });
+});
+
+// функция закрытия попапа нажатием на Esc и удаление слушателя после закрытия
+function closeByEsc(evt) {
+  if (evt.key === 'Escape') {
+    document.querySelector('.popup_opened').classList.remove('popup_opened');
+  }
+  document.body.removeEventListener('keyup', closeByEsc);
+}
