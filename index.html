@@ -52,11 +52,13 @@
   </div>
 
   <div class="popup popup_type_edit-profile">
-    <form name="edit-form" class="popup__form">
+    <form name="edit-form" class="popup__form" novalidate>
       <fieldset class="popup__info">
         <legend class="popup__title">Редактирование профиля</legend>
-        <input type="text" class="popup__input popup__input_type_name">
-        <input type="text" class="popup__input popup__input_type_job">
+        <input id="name-input" type="text" class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
+        <span class="popup__input-error" id="name-input-error"></span>
+        <input id="job-input" type="text" class="popup__input popup__input_type_job" required minlength="2" maxlength="200">
+        <span class="popup__input-error" id="job-input-error"></span>
       </fieldset>
       <button type="submit" class="popup__submit-button">Сохранить</button>
       <button type="reset" class="popup__close-button"></button>
@@ -64,11 +66,13 @@
   </div>
 
   <div class="popup popup_type_add-card">
-    <form name="add-form" class="popup__form">
+    <form name="add-form" class="popup__form" novalidate>
       <fieldset class="popup__info">
         <legend class="popup__title">Новое место</legend>
-        <input type="text" class="popup__input popup__input_type_place"  placeholder = 'Название'>
-        <input type="text" class="popup__input popup__input_type_link" placeholder = 'Ссылка на картинку'>
+        <input id="place-input" type="text" class="popup__input popup__input_type_place"  placeholder = 'Название' required minlength="1" maxlength="30">
+        <span class="popup__input-error" id="place-input-error"></span>
+        <input id="link-input" type="url" class="popup__input popup__input_type_link" placeholder = 'Ссылка на картинку' required>
+        <span class="popup__input-error" id="link-input-error"></span>
       </fieldset>
       <button type="submit" class="popup__submit-button">Создать</button>
       <button type="reset" class="popup__close-button"></button>

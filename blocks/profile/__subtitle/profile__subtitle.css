@@ -4,20 +4,13 @@
   font-size: 18px;
   line-height: 22px;
   color: #fff;
-  max-width: 450px;
-}
-
-@media screen and (max-width: 919px) {
-  .profile__subtitle {
-    max-width: 350px;
-  }
+  width: 90%;
 }
 
 @media screen and (max-width: 767px) {
   .profile__subtitle {
     font-size: 14px;
     line-height: 17px;
-    max-width: 220px;
     }
 }
 

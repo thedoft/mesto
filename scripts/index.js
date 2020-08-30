@@ -179,6 +179,6 @@ popupList.forEach(popup => {
 function closeByEsc(evt) {
   if (evt.key === 'Escape') {
     document.querySelector('.popup_opened').classList.remove('popup_opened');
+    document.body.removeEventListener('keyup', closeByEsc);
   }
-  document.body.removeEventListener('keyup', closeByEsc);
 }
