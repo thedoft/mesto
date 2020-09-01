@@ -1,31 +1,3 @@
-// массив карточек "из коробки"
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 // выбор списка карточек и заготовки верстки карточки
 const elementsList = document.querySelector('.elements__list');
 const elementTemplate = document.querySelector('#element').content;
@@ -52,21 +24,18 @@ function newCard(item) {
     evt.target.classList.toggle('element__like-button_active');
   });
 
-  // обработчик для попапа с картинкой
+  // обработчик для попапа с картинкой - заполнение полей
   elementImage.addEventListener('click', () => {
     elementPopupImage.src = elementImage.src;
     elementPopupImage.alt = elementImage.alt;
     elementPopupSubtitle.textContent = elementTitle.textContent;
-
-    elementPopup.classList.add('popup_opened');
-
-    // добавление слушателя для закрытия попапа нажатием на Esc
-    document.body.addEventListener('keyup', closeByEsc);
   });
 
+  // обработчик открытия попапа
+  elementImage.addEventListener('click', () => { openPopup(elementPopup) });
 
   // слушатель для кнопки Закрыть попапа с картинкой
-  elementPopupCloseButton.addEventListener('click', closePopup);
+  elementPopupCloseButton.addEventListener('click', () => { closePopup(elementPopup) });
 
   // выбор кнопки удаления карточки и обработчик события для нее
   const trashButton = element.querySelector('.element__trash-button');
@@ -76,11 +45,6 @@ function newCard(item) {
 
   return element;
 }
-
-// добавление карточек "из коробки"
-initialCards.forEach(item => {
-  elementsList.append(newCard(item));
-});
 
 // выбор элементов секции profile
 const profile = document.querySelector('.profile');
@@ -100,61 +64,66 @@ const addPopupLink = addPopup.querySelector('.popup__input_type_link');
 
 // функция открытия попапа с формой
 function openPopup(popup) {
-  return function () {
-    if (popup === editPopup) {
-      editPopupName.value = profileName.textContent;
-      editPopupJob.value = profileJob.textContent;
-    } else if (popup === addPopup) {
-      addPopupPlace.value = '';
-      addPopupLink.value = '';
-    }
-    popup.classList.add('popup_opened');
+  popup.classList.add('popup_opened');
 
-    // добавление слушателя для закрытия попапа нажатием на Esc
-    document.body.addEventListener('keyup', closeByEsc);
-  }
+  enableValidation({
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+  });
+
+  // добавление слушателя для закрытия попапа нажатием на Esc
+  document.body.addEventListener('keyup', closeByEsc);
+}
+
+function fillEditPopup() {
+  editPopupName.value = profileName.textContent;
+  editPopupJob.value = profileJob.textContent;
+}
+
+function fillAddPopup() {
+  addPopupPlace.value = '';
+  addPopupLink.value = '';
 }
 
 // добавление слушателя событий на кнопки редактирования профиля, добавления карточки
-editButton.addEventListener('click', openPopup(editPopup));
-addButton.addEventListener('click', openPopup(addPopup));
+editButton.addEventListener('click', fillEditPopup);
+editButton.addEventListener('click', () => { openPopup(editPopup); });
+addButton.addEventListener('click', fillAddPopup);
+addButton.addEventListener('click', () => { openPopup(addPopup); });
 
 // функция закрытия попапа и слушатели для кнопок Закрыть
-function closePopup(evt) {
-  evt.target.closest('.popup').classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
   document.body.removeEventListener('keyup', closeByEsc);
 }
 
 const editPopupCloseButton = editPopup.querySelector('.popup__close-button');
-editPopupCloseButton.addEventListener('click', closePopup);
+editPopupCloseButton.addEventListener('click', () => { closePopup(editPopup) });
 
 const addPopupCloseButton = addPopup.querySelector('.popup__close-button');
-addPopupCloseButton.addEventListener('click', closePopup);
+addPopupCloseButton.addEventListener('click', () => { closePopup(addPopup) });
 
 // функция-обработчик события клика на кнопку попапа Сохранить
-function saveProfile(evt) {
-  evt.preventDefault();
-
+function saveProfile() {
   profileName.textContent = editPopupName.value;
   profileJob.textContent = editPopupJob.value;
 
-  closePopup(evt);
+  closePopup(editPopup);
 }
 
 // функция-обработчик события клика на кнопку попапа Создать
-function addCard(evt) {
-  evt.preventDefault();
-
+function addCard() {
   const item = {
     name: addPopupPlace.value,
     link: addPopupLink.value
   };
+  elementsList.prepend(newCard(item));
 
-  if ((item.name !== '') && (item.link !== '')) {
-    elementsList.prepend(newCard(item));
-  }
-
-  closePopup(evt);
+  closePopup(addPopup);
 }
 
 // выбор форм
@@ -168,9 +137,9 @@ addForm.addEventListener('submit', addCard);
 // выберем все попапы и добавим им возможность закрытия кликом на оверлей
 const popupList = Array.from(document.querySelectorAll('.popup'));
 popupList.forEach(popup => {
-  popup.addEventListener('click', evt => {
+  popup.addEventListener('mousedown', evt => {
     if (evt.target === evt.currentTarget) {
-      closePopup(evt);
+      closePopup(popup);
     }
   });
 });
