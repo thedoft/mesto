@@ -45,7 +45,6 @@ function setEventListeners(obj, form) {
   toggleButtonState(obj, inputList, button);
 
   inputList.forEach(input => {
-    hideInputError(obj, form, input);
     input.addEventListener('input', () => {
       isValid(obj, form, input);
       toggleButtonState(obj, inputList, button);
@@ -62,5 +61,26 @@ function enableValidation(obj) {
     });
 
     setEventListeners(obj, form);
+  });
+}
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__submit-button_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+});
+
+function cleanErrors(popup, obj) {
+  const form = popup.querySelector(obj['formSelector']);
+  const inputList = Array.from(popup.querySelectorAll(obj['inputSelector']));
+  const button = popup.querySelector(obj['submitButtonSelector']);
+
+  toggleButtonState(obj, inputList, button);
+
+  inputList.forEach(input => {
+    hideInputError(obj, form, input);
   });
 }

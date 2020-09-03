@@ -6,7 +6,6 @@ const elementTemplate = document.querySelector('#element').content;
 const elementPopup = document.querySelector('.popup_type_image');
 const elementPopupImage = elementPopup.querySelector('.popup__image');
 const elementPopupSubtitle = elementPopup.querySelector('.popup__subtitle');
-const elementPopupCloseButton = elementPopup.querySelector('.popup__close-button');
 
 // функция добавления карточки
 function newCard(item) {
@@ -24,18 +23,14 @@ function newCard(item) {
     evt.target.classList.toggle('element__like-button_active');
   });
 
-  // обработчик для попапа с картинкой - заполнение полей
+  // обработчик для попапа с картинкой
   elementImage.addEventListener('click', () => {
     elementPopupImage.src = elementImage.src;
     elementPopupImage.alt = elementImage.alt;
     elementPopupSubtitle.textContent = elementTitle.textContent;
+
+    openPopup(elementPopup);
   });
-
-  // обработчик открытия попапа
-  elementImage.addEventListener('click', () => { openPopup(elementPopup) });
-
-  // слушатель для кнопки Закрыть попапа с картинкой
-  elementPopupCloseButton.addEventListener('click', () => { closePopup(elementPopup) });
 
   // выбор кнопки удаления карточки и обработчик события для нее
   const trashButton = element.querySelector('.element__trash-button');
@@ -66,15 +61,6 @@ const addPopupLink = addPopup.querySelector('.popup__input_type_link');
 function openPopup(popup) {
   popup.classList.add('popup_opened');
 
-  enableValidation({
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit-button',
-    inactiveButtonClass: 'popup__submit-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
-  });
-
   // добавление слушателя для закрытия попапа нажатием на Esc
   document.body.addEventListener('keyup', closeByEsc);
 }
@@ -90,22 +76,47 @@ function fillAddPopup() {
 }
 
 // добавление слушателя событий на кнопки редактирования профиля, добавления карточки
-editButton.addEventListener('click', fillEditPopup);
-editButton.addEventListener('click', () => { openPopup(editPopup); });
-addButton.addEventListener('click', fillAddPopup);
-addButton.addEventListener('click', () => { openPopup(addPopup); });
+editButton.addEventListener('click', () => {
+  fillEditPopup();
+  openPopup(editPopup);
+  cleanErrors(editPopup, {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+  });
+});
+addButton.addEventListener('click', () => {
+  fillAddPopup();
+  openPopup(addPopup);
+  cleanErrors(addPopup, {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__submit-button',
+    inactiveButtonClass: 'popup__submit-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+  });
+});
 
-// функция закрытия попапа и слушатели для кнопок Закрыть
+// функция закрытия попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.body.removeEventListener('keyup', closeByEsc);
 }
 
+// слушатели для кнопок Закрыть
 const editPopupCloseButton = editPopup.querySelector('.popup__close-button');
 editPopupCloseButton.addEventListener('click', () => { closePopup(editPopup) });
 
 const addPopupCloseButton = addPopup.querySelector('.popup__close-button');
 addPopupCloseButton.addEventListener('click', () => { closePopup(addPopup) });
+
+const elementPopupCloseButton = elementPopup.querySelector('.popup__close-button');
+elementPopupCloseButton.addEventListener('click', () => { closePopup(elementPopup) });
+
 
 // функция-обработчик события клика на кнопку попапа Сохранить
 function saveProfile() {
@@ -147,7 +158,7 @@ popupList.forEach(popup => {
 // функция закрытия попапа нажатием на Esc и удаление слушателя после закрытия
 function closeByEsc(evt) {
   if (evt.key === 'Escape') {
-    document.querySelector('.popup_opened').classList.remove('popup_opened');
-    document.body.removeEventListener('keyup', closeByEsc);
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
   }
 }
