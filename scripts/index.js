@@ -79,26 +79,13 @@ function fillAddPopup() {
 editButton.addEventListener('click', () => {
   fillEditPopup();
   openPopup(editPopup);
-  cleanErrors(editPopup, {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit-button',
-    inactiveButtonClass: 'popup__submit-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
-  });
+  cleanErrors(editPopup, configObject);
 });
+
 addButton.addEventListener('click', () => {
   fillAddPopup();
   openPopup(addPopup);
-  cleanErrors(addPopup, {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__submit-button',
-    inactiveButtonClass: 'popup__submit-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
-  });
+  cleanErrors(addPopup, configObject);
 });
 
 // функция закрытия попапа
