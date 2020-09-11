@@ -1,45 +1,18 @@
-// выбор списка карточек и заготовки верстки карточки
+import initialCards from './initial.js';
+import Card from './Card.js';
+import configObject from './constants.js';
+import { FormValidator, ErrorsCleaner } from './FormValidator.js';
+
+// выбор списка карточек
 const elementsList = document.querySelector('.elements__list');
-const elementTemplate = document.querySelector('#element').content;
 
-// выбор попапа картинки и его элементов
-const elementPopup = document.querySelector('.popup_type_image');
-const elementPopupImage = elementPopup.querySelector('.popup__image');
-const elementPopupSubtitle = elementPopup.querySelector('.popup__subtitle');
+// добавление карточек "из коробки"
+initialCards.forEach(item => {
+  const card = new Card(item, '#element');
+  const cardElement = card.generateCard();
 
-// функция добавления карточки
-function newCard(item) {
-  const element = elementTemplate.cloneNode(true);
-  const elementImage = element.querySelector('.element__image');
-  const elementTitle = element.querySelector('.element__title');
-
-  elementImage.src = item.link;
-  elementImage.alt = item.name;
-  elementTitle.textContent = item.name;
-
-  // выбор кнопки like и добавление кнопке обработчика событий, делающего ее активной/неактивной при нажатии
-  const likeButton = element.querySelector('.element__like-button');
-  likeButton.addEventListener('click', function(evt) {
-    evt.target.classList.toggle('element__like-button_active');
-  });
-
-  // обработчик для попапа с картинкой
-  elementImage.addEventListener('click', () => {
-    elementPopupImage.src = elementImage.src;
-    elementPopupImage.alt = elementImage.alt;
-    elementPopupSubtitle.textContent = elementTitle.textContent;
-
-    openPopup(elementPopup);
-  });
-
-  // выбор кнопки удаления карточки и обработчик события для нее
-  const trashButton = element.querySelector('.element__trash-button');
-  trashButton.addEventListener('click', function(evt) {
-    evt.target.closest('.element').remove();
-  });
-
-  return element;
-}
+  elementsList.append(cardElement);
+});
 
 // выбор элементов секции profile
 const profile = document.querySelector('.profile');
@@ -56,6 +29,8 @@ const editPopupJob = editPopup.querySelector('.popup__input_type_job');
 const addPopup = document.querySelector('.popup_type_add-card');
 const addPopupPlace = addPopup.querySelector('.popup__input_type_place');
 const addPopupLink = addPopup.querySelector('.popup__input_type_link');
+
+const imagePopup = document.querySelector('.popup_type_image');
 
 // функция открытия попапа с формой
 function openPopup(popup) {
@@ -75,17 +50,38 @@ function fillAddPopup() {
   addPopupLink.value = '';
 }
 
+function fillImagePopup(element) {
+  const elementImage = element.querySelector('.element__image');
+  const elementTitle = element.querySelector('.element__title');
+
+  imagePopup.querySelector('.popup__image').src = elementImage.src;
+  imagePopup.querySelector('.popup__image').alt = elementTitle.textContent;
+  imagePopup.querySelector('.popup__subtitle').textContent = elementTitle.textContent;
+}
+
 // добавление слушателя событий на кнопки редактирования профиля, добавления карточки
 editButton.addEventListener('click', () => {
   fillEditPopup();
   openPopup(editPopup);
-  cleanErrors(editPopup, configObject);
+
+  const formCleaner = new ErrorsCleaner(configObject, editForm);
+  formCleaner.cleanErrors();
 });
 
 addButton.addEventListener('click', () => {
   fillAddPopup();
   openPopup(addPopup);
-  cleanErrors(addPopup, configObject);
+
+  const formCleaner = new ErrorsCleaner(configObject, addForm);
+  formCleaner.cleanErrors();
+});
+
+const elementList = Array.from(document.querySelectorAll('.element'));
+elementList.forEach(element => {
+  element.querySelector('.element__image').addEventListener('click', () => {
+    fillImagePopup(element);
+    openPopup(imagePopup);
+  });
 });
 
 // функция закрытия попапа
@@ -101,9 +97,8 @@ editPopupCloseButton.addEventListener('click', () => { closePopup(editPopup) });
 const addPopupCloseButton = addPopup.querySelector('.popup__close-button');
 addPopupCloseButton.addEventListener('click', () => { closePopup(addPopup) });
 
-const elementPopupCloseButton = elementPopup.querySelector('.popup__close-button');
-elementPopupCloseButton.addEventListener('click', () => { closePopup(elementPopup) });
-
+const imagePopupCloseButton = imagePopup.querySelector('.popup__close-button');
+imagePopupCloseButton.addEventListener('click', () => { closePopup(imagePopup) });
 
 // функция-обработчик события клика на кнопку попапа Сохранить
 function saveProfile() {
@@ -119,14 +114,23 @@ function addCard() {
     name: addPopupPlace.value,
     link: addPopupLink.value
   };
-  elementsList.prepend(newCard(item));
+
+  const card = new Card(item, '#element');
+  const cardElement = card.generateCard();
+
+  elementsList.prepend(cardElement);
 
   closePopup(addPopup);
 }
 
 // выбор форм
 const editForm = document.forms['edit-form'];
+const editFormValidator = new FormValidator(configObject, editForm);
+editFormValidator.enableValidation();
+
 const addForm = document.forms['add-form'];
+const addFormValidator = new FormValidator(configObject, addForm);
+addFormValidator.enableValidation();
 
 // добавление слушателей событий на формы
 editForm.addEventListener('submit', saveProfile);
@@ -149,3 +153,5 @@ function closeByEsc(evt) {
     closePopup(openedPopup);
   }
 }
+
+export { openPopup, closePopup };

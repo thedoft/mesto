@@ -26,7 +26,4 @@ const initialCards = [
   }
 ];
 
-// добавление карточек "из коробки"
-initialCards.forEach(item => {
-  elementsList.append(newCard(item));
-});
+export default initialCards;
