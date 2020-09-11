@@ -153,5 +153,3 @@ function closeByEsc(evt) {
     closePopup(openedPopup);
   }
 }
-
-export { openPopup, closePopup };

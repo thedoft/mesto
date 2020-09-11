@@ -1,5 +1,3 @@
-import { openPopup, closePopup } from './index.js';
-
 class Card {
   constructor(data, cardSelector) {
     this._image = data.link;
