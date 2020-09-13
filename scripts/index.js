@@ -5,10 +5,11 @@ import FormValidator from './FormValidator.js';
 
 // выбор списка карточек
 const elementsList = document.querySelector('.elements__list');
+const imagePopup = document.querySelector('.popup_type_image');
 
 // функция создания карточки
 function newCard(item) {
-  const card = new Card(item, '#element', openPopup);
+  const card = new Card(item, '#element', imagePopup, openPopup);
   const cardElement = card.generateCard();
 
   return cardElement;
@@ -34,8 +35,6 @@ const editPopupJob = editPopup.querySelector('.popup__input_type_job');
 const addPopup = document.querySelector('.popup_type_add-card');
 const addPopupPlace = addPopup.querySelector('.popup__input_type_place');
 const addPopupLink = addPopup.querySelector('.popup__input_type_link');
-
-const imagePopup = document.querySelector('.popup_type_image');
 
 // функция открытия попапа с формой
 function openPopup(popup) {

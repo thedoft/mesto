@@ -1,8 +1,9 @@
 class Card {
-  constructor(data, cardSelector, openPopup) {
+  constructor(data, cardSelector, popup, openPopup) {
     this._image = data.link;
     this._title = data.name;
     this._cardSelector = cardSelector;
+    this._popup = popup;
     this._openPopup = openPopup;
   }
 
@@ -55,15 +56,14 @@ class Card {
   }
 
   _getPopup() {
-    const elementPopup = document.querySelector('.popup_type_image');
-    const popupImage = elementPopup.querySelector('.popup__image');
-    const popupTitle = elementPopup.querySelector('.popup__subtitle');
+    const popupImage = this._popup.querySelector('.popup__image');
+    const popupTitle = this._popup.querySelector('.popup__subtitle');
 
     popupImage.src = this._elementImage.src;
     popupImage.alt = this._elementTitle.textContent;
     popupTitle.textContent = this._elementTitle.textContent;
 
-    return elementPopup;
+    return this._popup;
   }
 }
 
