@@ -69,23 +69,17 @@ class FormValidator {
 
       this._setEventListeners(this._form);
   }
-}
-
-class ErrorsCleaner extends FormValidator {
-  constructor(obj, form) {
-    super(obj, form);
-  }
 
   cleanErrors() {
     const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
     const button = this._form.querySelector(this._submitButtonSelector);
 
-    super._toggleButtonState(inputList, button);
+    this._toggleButtonState(inputList, button);
 
     inputList.forEach(input => {
-      super._hideInputError(input);
+      this._hideInputError(input);
     });
   }
 }
 
-export { FormValidator, ErrorsCleaner };
+export default FormValidator;

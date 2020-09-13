@@ -1,17 +1,22 @@
 import initialCards from './initial.js';
 import Card from './Card.js';
 import configObject from './constants.js';
-import { FormValidator, ErrorsCleaner } from './FormValidator.js';
+import FormValidator from './FormValidator.js';
 
 // выбор списка карточек
 const elementsList = document.querySelector('.elements__list');
 
-// добавление карточек "из коробки"
-initialCards.forEach(item => {
-  const card = new Card(item, '#element');
+// функция создания карточки
+function newCard(item) {
+  const card = new Card(item, '#element', openPopup);
   const cardElement = card.generateCard();
 
-  elementsList.append(cardElement);
+  return cardElement;
+}
+
+// добавление карточек "из коробки"
+initialCards.forEach(item => {
+  elementsList.append(newCard(item));
 });
 
 // выбор элементов секции profile
@@ -50,38 +55,19 @@ function fillAddPopup() {
   addPopupLink.value = '';
 }
 
-function fillImagePopup(element) {
-  const elementImage = element.querySelector('.element__image');
-  const elementTitle = element.querySelector('.element__title');
-
-  imagePopup.querySelector('.popup__image').src = elementImage.src;
-  imagePopup.querySelector('.popup__image').alt = elementTitle.textContent;
-  imagePopup.querySelector('.popup__subtitle').textContent = elementTitle.textContent;
-}
-
 // добавление слушателя событий на кнопки редактирования профиля, добавления карточки
 editButton.addEventListener('click', () => {
   fillEditPopup();
   openPopup(editPopup);
 
-  const formCleaner = new ErrorsCleaner(configObject, editForm);
-  formCleaner.cleanErrors();
+  editFormValidator.cleanErrors();
 });
 
 addButton.addEventListener('click', () => {
   fillAddPopup();
   openPopup(addPopup);
 
-  const formCleaner = new ErrorsCleaner(configObject, addForm);
-  formCleaner.cleanErrors();
-});
-
-const elementList = Array.from(document.querySelectorAll('.element'));
-elementList.forEach(element => {
-  element.querySelector('.element__image').addEventListener('click', () => {
-    fillImagePopup(element);
-    openPopup(imagePopup);
-  });
+  addFormValidator.cleanErrors();
 });
 
 // функция закрытия попапа
@@ -115,10 +101,7 @@ function addCard() {
     link: addPopupLink.value
   };
 
-  const card = new Card(item, '#element');
-  const cardElement = card.generateCard();
-
-  elementsList.prepend(cardElement);
+  elementsList.prepend(newCard(item));
 
   closePopup(addPopup);
 }

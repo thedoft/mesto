@@ -1,8 +1,9 @@
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, openPopup) {
     this._image = data.link;
     this._title = data.name;
     this._cardSelector = cardSelector;
+    this._openPopup = openPopup;
   }
 
   _getTemplate() {
@@ -17,35 +18,50 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
-    this._popup = this._getPopupElement();
+
+    this._elementImage = this._element.querySelector('.element__image');
+    this._elementTitle = this._element.querySelector('.element__title');
+    this._elementLikeButton = this._element.querySelector('.element__like-button');
+    this._elementTrashButton = this._element.querySelector('.element__trash-button');
+
     this._setEventListeners();
 
-    this._element.querySelector('.element__image').src = this._image;
-    this._element.querySelector('.element__image').alt = this._title;
-    this._element.querySelector('.element__title').textContent = this._title;
+    this._elementImage.src = this._image;
+    this._elementImage.alt = this._title;
+    this._elementTitle.textContent = this._title;
 
     return this._element;
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__like-button').addEventListener('click', (evt) => {
-      this._likeCard(evt);
+    this._elementLikeButton.addEventListener('click', () => {
+      this._likeCard();
     });
-    this._element.querySelector('.element__trash-button').addEventListener('click', (evt) => {
-      this._removeCard(evt);
+    this._elementTrashButton.addEventListener('click', () => {
+      this._removeCard();
+    });
+    this._elementImage.addEventListener('click', () => {
+      this._openPopup(this._getPopup());
     });
   }
 
-  _likeCard(evt) {
-    evt.target.classList.toggle('element__like-button_active');
+  _likeCard() {
+    this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
   }
 
-  _removeCard(evt) {
-    evt.target.closest('.element').remove();
+  _removeCard() {
+    this._element.remove();
+    this._element = null;
   }
 
-  _getPopupElement() {
+  _getPopup() {
     const elementPopup = document.querySelector('.popup_type_image');
+    const popupImage = elementPopup.querySelector('.popup__image');
+    const popupTitle = elementPopup.querySelector('.popup__subtitle');
+
+    popupImage.src = this._elementImage.src;
+    popupImage.alt = this._elementTitle.textContent;
+    popupTitle.textContent = this._elementTitle.textContent;
 
     return elementPopup;
   }
