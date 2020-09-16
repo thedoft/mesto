@@ -1,4 +1,4 @@
-# Проект 4: Место
+# Проект по JavaScript "Место" в Яндекс.Практикум
 
 https://thedoft.github.io/mesto/index.html
 
