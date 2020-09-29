@@ -1,27 +1,27 @@
 // массив карточек "из коробки"
 const initialCards = [
   {
-      name: 'США',
+      place: 'США',
       link: './images/usa.jpg'
   },
   {
-      name: 'Барселона',
+      place: 'Барселона',
       link: './images/barcelona.jpg'
   },
   {
-      name: 'Индонезия',
+      place: 'Индонезия',
       link: './images/indonesia.jpg'
   },
   {
-      name: 'Бавария',
+      place: 'Бавария',
       link: './images/bayern.jpg'
   },
   {
-      name: 'Париж',
+      place: 'Париж',
       link: './images/paris.jpg'
   },
   {
-      name: 'Сан-Франциско',
+      place: 'Сан-Франциско',
       link: './images/san-francisco.jpg'
   }
 ];

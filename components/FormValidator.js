@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(obj, form) {
     this._form = form;
     this._inputSelector = obj['inputSelector'];
@@ -9,7 +9,7 @@ class FormValidator {
   }
 
   _showInputError(input, errorMessage) {
-    this._error = this._form.querySelector(`#${input.id}-error`);
+    this._error = this._form.querySelector(`#${input.name}-error`);
 
     input.classList.add(this._inputErrorClass);
     this._error.textContent = errorMessage;
@@ -17,7 +17,7 @@ class FormValidator {
   }
 
   _hideInputError(input) {
-    this._error = this._form.querySelector(`#${input.id}-error`);
+    this._error = this._form.querySelector(`#${input.name}-error`);
 
     input.classList.remove(this._inputErrorClass);
     this._error.classList.remove(this._errorClass);
@@ -63,10 +63,6 @@ class FormValidator {
   }
 
   enableValidation() {
-    this._form.addEventListener('submit', evt => {
-      evt.preventDefault();
-    });
-
       this._setEventListeners(this._form);
   }
 
@@ -81,5 +77,3 @@ class FormValidator {
     });
   }
 }
-
-export default FormValidator;
