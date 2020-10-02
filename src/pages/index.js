@@ -2,10 +2,15 @@ import './index.css';
 import {
   editButton,
   addButton,
+  imagePopupSelector,
+  editPopupSelector,
+  addPopupSelector,
   nameInput,
   jobInput,
   placeInput,
   linkInput,
+  cardListSelector,
+  cardSelector,
   configObject
 } from '../utils/constants.js';
 import initialCards from '../utils/initial.js';
@@ -16,26 +21,31 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
 
-const imagePopup = new PopupWithImage({ popupSelector: '.popup_type_image' });
+const imagePopup = new PopupWithImage({ popupSelector: imagePopupSelector });
 imagePopup.setEventListeners();
+
+// функциональное выражение для создания карточки
+const newCard = ({ place, link }) => {
+  const card = new Card({
+    place,
+    link,
+    cardSelector,
+    handleCardClick: () => {
+      imagePopup.open({ place, link });
+    }
+  });
+  const cardElement = card.generateCard();
+
+  cardList.addItem(cardElement);
+}
 
 // создание секции с карточками и наполнение ее карточками "из коробки"
 const cardList = new Section({
   items: initialCards,
   renderer: ({ place, link }) => {
-    const card = new Card({
-      place,
-      link,
-      cardSelector: '#element',
-      handleCardClick: () => {
-        imagePopup.open({ place, link });
-      }
-    });
-    const cardElement = card.generateCard();
-
-    cardList.addItem(cardElement);
-  }
-}, '.elements__list');
+    newCard({ place, link });
+   }
+}, cardListSelector);
 
 // отрисовка дефолтных карточек
 cardList.renderItems();
@@ -47,11 +57,11 @@ const userInfo = new UserInfo({
 
 //создание классов для попапов с формами
 const editPopup = new PopupWithForm({
-  popupSelector: '.popup_type_edit-profile',
-  handleFormSubmit: (obj) => {
+  popupSelector: editPopupSelector,
+  handleFormSubmit: (inputsValues) => {
     userInfo.setUserInfo({
-      name: obj['name-input'],
-      job: obj['job-input']
+      name: inputsValues['name-input'],
+      job: inputsValues['job-input']
     });
     editPopup.close();
   }
@@ -59,41 +69,16 @@ const editPopup = new PopupWithForm({
 editPopup.setEventListeners();
 
 const addPopup = new PopupWithForm({
-  popupSelector: '.popup_type_add-card',
-  handleFormSubmit: (obj) => {
-    const card = new Card({ place: obj['place-input'],
-      link: obj['link-input'],
-      cardSelector: '#element',
-      handleCardClick: () => {
-        imagePopup.open({ place, link });
-      }
+  popupSelector: addPopupSelector,
+  handleFormSubmit: (inputsValues) => {
+    newCard({
+      place: inputsValues['place-input'],
+      link: inputsValues['link-input'],
     });
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
-
     addPopup.close();
   }
 });
 addPopup.setEventListeners();
-
-// слушатели для кнопок редактирования профиля и добавления карточки
-editButton.addEventListener('click', () => {
-  const profileData = userInfo.getUserInfo();
-
-  nameInput.value = profileData.name;
-  jobInput.value = profileData.job;
-
-  editPopup.open();
-  editFormValidator.cleanErrors();
-});
-
-addButton.addEventListener('click', () => {
-  placeInput.value = '';
-  linkInput.value = '';
-
-  addPopup.open();
-  addFormValidator.cleanErrors();
-});
 
 // выбор форм и добавление им валидаторов
 const editForm = document.forms['edit-form'];
@@ -103,3 +88,22 @@ editFormValidator.enableValidation();
 const addForm = document.forms['add-form'];
 const addFormValidator = new FormValidator(configObject, addForm);
 addFormValidator.enableValidation();
+
+// слушатели для кнопок редактирования профиля и добавления карточки
+editButton.addEventListener('click', () => {
+  const profileData = userInfo.getUserInfo();
+
+  nameInput.value = profileData.name;
+  jobInput.value = profileData.job;
+
+  editFormValidator.cleanErrors();
+  editPopup.open();
+});
+
+addButton.addEventListener('click', () => {
+  placeInput.value = '';
+  linkInput.value = '';
+
+  addFormValidator.cleanErrors();
+  addPopup.open();
+});
