@@ -1,13 +1,22 @@
-// выбор элементов секции profile
+// элементы секции profile
 const profile = document.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
 const addButton = profile.querySelector('.profile__add-button');
+
+// селекторы спопапов
+const imagePopupSelector = '.popup_type_image';
+const editPopupSelector = '.popup_type_edit-profile';
+const addPopupSelector = '.popup_type_add-card';
 
 // выбор инпутов форм
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const placeInput = document.querySelector('.popup__input_type_place');
 const linkInput = document.querySelector('.popup__input_type_link');
+
+// селекторы списка карточек и элемента карточки
+const cardListSelector = '.elements__list';
+const cardSelector = '#element';
 
 // объект со свойствами для валидации форм
 const configObject = {
@@ -18,4 +27,17 @@ const configObject = {
   errorClass: 'popup__input-error_active'
 };
 
-export { editButton, addButton, nameInput, jobInput, placeInput, linkInput, configObject };
+export {
+  editButton,
+  addButton,
+  imagePopupSelector,
+  editPopupSelector,
+  addPopupSelector,
+  nameInput,
+  jobInput,
+  placeInput,
+  linkInput,
+  cardListSelector,
+  cardSelector,
+  configObject
+};
