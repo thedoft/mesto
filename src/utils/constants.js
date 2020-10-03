@@ -3,6 +3,10 @@ const profile = document.querySelector('.profile');
 const editButton = profile.querySelector('.profile__edit-button');
 const addButton = profile.querySelector('.profile__add-button');
 
+// селекторы данных профиля
+const profileTitleSelector = '.profile__title';
+const profileSubtitleSelector = '.profile__subtitle';
+
 // селекторы спопапов
 const imagePopupSelector = '.popup_type_image';
 const editPopupSelector = '.popup_type_edit-profile';
@@ -28,6 +32,8 @@ const configObject = {
 };
 
 export {
+  profileTitleSelector,
+  profileSubtitleSelector,
   editButton,
   addButton,
   imagePopupSelector,

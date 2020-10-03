@@ -1,5 +1,7 @@
 import './index.css';
 import {
+  profileTitleSelector,
+  profileSubtitleSelector,
   editButton,
   addButton,
   imagePopupSelector,
@@ -25,7 +27,7 @@ const imagePopup = new PopupWithImage({ popupSelector: imagePopupSelector });
 imagePopup.setEventListeners();
 
 // функциональное выражение для создания карточки
-const newCard = ({ place, link }) => {
+const createCard = ({ place, link }) => {
   const card = new Card({
     place,
     link,
@@ -36,14 +38,16 @@ const newCard = ({ place, link }) => {
   });
   const cardElement = card.generateCard();
 
-  cardList.addItem(cardElement);
+  return cardElement;
 }
 
 // создание секции с карточками и наполнение ее карточками "из коробки"
 const cardList = new Section({
   items: initialCards,
   renderer: ({ place, link }) => {
-    newCard({ place, link });
+    const card = createCard({ place, link });
+
+    cardList.addItem(card);
    }
 }, cardListSelector);
 
@@ -51,8 +55,8 @@ const cardList = new Section({
 cardList.renderItems();
 
 const userInfo = new UserInfo({
-  nameSelector: '.profile__title',
-  jobSelector: '.profile__subtitle'
+  nameSelector: profileTitleSelector,
+  jobSelector: profileSubtitleSelector,
 });
 
 //создание классов для попапов с формами
@@ -71,10 +75,12 @@ editPopup.setEventListeners();
 const addPopup = new PopupWithForm({
   popupSelector: addPopupSelector,
   handleFormSubmit: (inputsValues) => {
-    newCard({
+    const card = createCard({
       place: inputsValues['place-input'],
       link: inputsValues['link-input'],
     });
+    cardList.addItem(card);
+
     addPopup.close();
   }
 });
