@@ -16,11 +16,14 @@
 
     <main class="content">
       <section class="profile">
-        <img src="./images/arnold-schwarzenegger.jpg" alt="Аватар" class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src="./images/arnold-schwarzenegger.jpg" alt="Аватар" class="profile__avatar">
+          <button type="button" class="profile__edit-button profile__edit-button_type_avatar"></button>
+        </div>
         <div class="profile__info">
           <div class="profile__title-container">
             <h1 class="profile__title">А. Шварценеггер</h1>
-            <button type="button" class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button profile__edit-button_type_profile"></button>
           </div>
           <p class="profile__subtitle">Культурист, актер, политик, общественный деятель</p>
         </div>
@@ -37,8 +40,20 @@
       <p class="footer__copyright" lang="en">&copy; 2020 Mesto Russia</p>
     </footer>
 
+    <div class="popup popup_type_edit-avatar">
+      <form name="edit-avatar-form" class="popup__form" novalidate>
+        <fieldset class="popup__info">
+          <legend class="popup__title">Обновить аватар</legend>
+          <input name="avatar-input" type="url" class="popup__input popup__input_type_avatar" required>
+          <span class="popup__input-error" id="avatar-input-error"></span>
+        </fieldset>
+        <button type="submit" class="popup__submit-button">Обновить</button>
+        <button type="reset" class="popup__close-button"></button>
+      </form>
+    </div>
+
     <div class="popup popup_type_edit-profile">
-      <form name="edit-form" class="popup__form" novalidate>
+      <form name="edit-profile-form" class="popup__form" novalidate>
         <fieldset class="popup__info">
           <legend class="popup__title">Редактирование профиля</legend>
           <input name="name-input" type="text" class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
@@ -72,21 +87,27 @@
         <button type="reset" class="popup__close-button"></button>
       </div>
     </div>
-  </div>
 
-  <template id="element">
-    <li class="element">
-      <img class="element__image">
-      <div class="element__title-container">
-        <h2 class="element__title"></h2>
-        <div class="element__likes-container">
-          <button type="button" class="element__like-button"></button>
-          <p class="element__likes-count"></p>
+    <div class="popup popup_type_confirm">
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button type="submit" class="popup__submit-button">Да</button>
+      <button type="reset" class="popup__close-button"></button>
+    </div>
+
+    <template id="element">
+      <li class="element">
+        <img class="element__image">
+        <div class="element__title-container">
+          <h2 class="element__title"></h2>
+          <div class="element__likes-container">
+            <button type="button" class="element__like-button"></button>
+            <p class="element__likes-count"></p>
+          </div>
         </div>
-      </div>
-      <button type="button" class="element__trash-button"></button>
-    </li>
-  </template>
+        <button type="button" class="element__trash-button"></button>
+      </li>
+    </template>
 
+  </div>
 </body>
 </html>

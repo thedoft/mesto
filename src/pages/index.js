@@ -2,11 +2,15 @@ import './index.css';
 import {
   profileTitleSelector,
   profileSubtitleSelector,
-  editButton,
+  avatar,
+  editAvatarButton,
+  editProfileButton,
   addButton,
-  imagePopupSelector,
-  editPopupSelector,
+  editAvatarPopupSelector,
+  editProfilePopupSelector,
   addPopupSelector,
+  imagePopupSelector,
+  avatarInput,
   nameInput,
   jobInput,
   placeInput,
@@ -19,6 +23,7 @@ import initialCards from '../utils/initial.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import UserInfo from '../components/UserInfo.js';
+// import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
@@ -60,17 +65,27 @@ const userInfo = new UserInfo({
 });
 
 //создание классов для попапов с формами
-const editPopup = new PopupWithForm({
-  popupSelector: editPopupSelector,
+const editAvatarPopup = new PopupWithForm({
+  popupSelector: editAvatarPopupSelector,
+  handleFormSubmit: (inputsValues) => {
+    avatar.src = inputsValues['avatar-input'].value;
+
+    editAvatarPopup.close();
+  }
+});
+editAvatarPopup.setEventListeners();
+
+const editProfilePopup = new PopupWithForm({
+  popupSelector: editProfilePopupSelector,
   handleFormSubmit: (inputsValues) => {
     userInfo.setUserInfo({
       name: inputsValues['name-input'],
       job: inputsValues['job-input']
     });
-    editPopup.close();
+    editProfilePopup.close();
   }
 });
-editPopup.setEventListeners();
+editProfilePopup.setEventListeners();
 
 const addPopup = new PopupWithForm({
   popupSelector: addPopupSelector,
@@ -87,23 +102,32 @@ const addPopup = new PopupWithForm({
 addPopup.setEventListeners();
 
 // выбор форм и добавление им валидаторов
-const editForm = document.forms['edit-form'];
-const editFormValidator = new FormValidator(configObject, editForm);
-editFormValidator.enableValidation();
+const editAvatarForm = document.forms['edit-avatar-form'];
+const editAvatarFormValidator = new FormValidator(configObject, editAvatarForm);
+editAvatarFormValidator.enableValidation();
+
+const editProfileForm = document.forms['edit-profile-form'];
+const editProfileFormValidator = new FormValidator(configObject, editProfileForm);
+editProfileFormValidator.enableValidation();
 
 const addForm = document.forms['add-form'];
 const addFormValidator = new FormValidator(configObject, addForm);
 addFormValidator.enableValidation();
 
 // слушатели для кнопок редактирования профиля и добавления карточки
-editButton.addEventListener('click', () => {
+editAvatarButton.addEventListener('click', () => {
+  editAvatarFormValidator.cleanErrors();
+  editAvatarPopup.open();
+});
+
+editProfileButton.addEventListener('click', () => {
   const profileData = userInfo.getUserInfo();
 
   nameInput.value = profileData.name;
   jobInput.value = profileData.job;
 
-  editFormValidator.cleanErrors();
-  editPopup.open();
+  editProfileFormValidator.cleanErrors();
+  editProfilePopup.open();
 });
 
 addButton.addEventListener('click', () => {

@@ -1,18 +1,22 @@
 // элементы секции profile
 const profile = document.querySelector('.profile');
-const editButton = profile.querySelector('.profile__edit-button');
+const avatar = profile.querySelector('.profile__avatar');
+const editAvatarButton = profile.querySelector('.profile__edit-button_type_avatar');
+const editProfileButton = profile.querySelector('.profile__edit-button_type_profile');
 const addButton = profile.querySelector('.profile__add-button');
 
 // селекторы данных профиля
 const profileTitleSelector = '.profile__title';
 const profileSubtitleSelector = '.profile__subtitle';
 
-// селекторы спопапов
-const imagePopupSelector = '.popup_type_image';
-const editPopupSelector = '.popup_type_edit-profile';
+// селекторы попапов
+const editAvatarPopupSelector = '.popup_type_edit-avatar';
+const editProfilePopupSelector = '.popup_type_edit-profile';
 const addPopupSelector = '.popup_type_add-card';
+const imagePopupSelector = '.popup_type_image';
 
 // выбор инпутов форм
+const avatarInput = document.querySelector('.popup__input_type_avatar');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const placeInput = document.querySelector('.popup__input_type_place');
@@ -34,11 +38,15 @@ const configObject = {
 export {
   profileTitleSelector,
   profileSubtitleSelector,
-  editButton,
+  avatar,
+  editAvatarButton,
+  editProfileButton,
   addButton,
-  imagePopupSelector,
-  editPopupSelector,
+  editAvatarPopupSelector,
+  editProfilePopupSelector,
   addPopupSelector,
+  imagePopupSelector,
+  avatarInput,
   nameInput,
   jobInput,
   placeInput,
