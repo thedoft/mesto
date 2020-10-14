@@ -17,15 +17,15 @@
     <main class="content">
       <section class="profile">
         <div class="profile__avatar-container">
-          <img src="./images/arnold-schwarzenegger.jpg" alt="Аватар" class="profile__avatar">
+          <img alt="Аватар" class="profile__avatar">
           <button type="button" class="profile__edit-button profile__edit-button_type_avatar"></button>
         </div>
         <div class="profile__info">
           <div class="profile__title-container">
-            <h1 class="profile__title">А. Шварценеггер</h1>
+            <h1 class="profile__title"></h1>
             <button type="button" class="profile__edit-button profile__edit-button_type_profile"></button>
           </div>
-          <p class="profile__subtitle">Культурист, актер, политик, общественный деятель</p>
+          <p class="profile__subtitle"></p>
         </div>
         <button type="button" class="profile__add-button"></button>
       </section>
@@ -44,10 +44,10 @@
       <form name="edit-avatar-form" class="popup__form" novalidate>
         <fieldset class="popup__info">
           <legend class="popup__title">Обновить аватар</legend>
-          <input name="avatar-input" type="url" class="popup__input popup__input_type_avatar" required>
+          <input name="avatar-input" type="url" class="popup__input popup__input_type_avatar" placeholder="Ссылка на картинку" required>
           <span class="popup__input-error" id="avatar-input-error"></span>
         </fieldset>
-        <button type="submit" class="popup__submit-button">Обновить</button>
+        <button type="submit" class="popup__submit-button">Сохранить</button>
         <button type="reset" class="popup__close-button"></button>
       </form>
     </div>
@@ -56,9 +56,9 @@
       <form name="edit-profile-form" class="popup__form" novalidate>
         <fieldset class="popup__info">
           <legend class="popup__title">Редактирование профиля</legend>
-          <input name="name-input" type="text" class="popup__input popup__input_type_name" required minlength="2" maxlength="40">
+          <input name="name-input" type="text" class="popup__input popup__input_type_name" placeholder="Имя" required minlength="2" maxlength="40">
           <span class="popup__input-error" id="name-input-error"></span>
-          <input name="job-input" type="text" class="popup__input popup__input_type_job" required minlength="2" maxlength="200">
+          <input name="job-input" type="text" class="popup__input popup__input_type_job" placeholder="Занятие" required minlength="2" maxlength="200">
           <span class="popup__input-error" id="job-input-error"></span>
         </fieldset>
         <button type="submit" class="popup__submit-button">Сохранить</button>
@@ -67,7 +67,7 @@
     </div>
 
     <div class="popup popup_type_add-card">
-      <form name="add-form" class="popup__form" novalidate>
+      <form name="add-card-form" class="popup__form" novalidate>
         <fieldset class="popup__info">
           <legend class="popup__title">Новое место</legend>
           <input name="place-input" type="text" class="popup__input popup__input_type_place"  placeholder = 'Название' required minlength="1" maxlength="30">
@@ -75,7 +75,7 @@
           <input name="link-input" type="url" class="popup__input popup__input_type_link" placeholder = 'Ссылка на картинку' required>
           <span class="popup__input-error" id="link-input-error"></span>
         </fieldset>
-        <button type="submit" class="popup__submit-button">Создать</button>
+        <button type="submit" class="popup__submit-button">Сохранить</button>
         <button type="reset" class="popup__close-button"></button>
       </form>
     </div>
@@ -89,9 +89,11 @@
     </div>
 
     <div class="popup popup_type_confirm">
-      <h2 class="popup__title">Вы уверены?</h2>
-      <button type="submit" class="popup__submit-button">Да</button>
-      <button type="reset" class="popup__close-button"></button>
+      <form name="confirm-form" class="popup__form" novalidate>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type="submit" class="popup__submit-button">Да</button>
+        <button type="reset" class="popup__close-button"></button>
+      </form>
     </div>
 
     <template id="element">

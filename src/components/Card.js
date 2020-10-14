@@ -1,9 +1,14 @@
 export default class Card {
-  constructor({ place, link, cardSelector, handleCardClick }) {
-    this._title = place;
+  constructor({ name, link, likes, _id, owner, cardSelector, handleCardClick, handleLikeClick, handleDeleteClick }) {
+    this._title = name;
     this._image = link;
+    this.likes = likes;
+    this._id = _id;
+    this._owner = owner;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleLikeClick = handleLikeClick;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   _getTemplate() {
@@ -21,35 +26,38 @@ export default class Card {
 
     this._elementImage = this._element.querySelector('.element__image');
     this._elementTitle = this._element.querySelector('.element__title');
-    this._elementLikeButton = this._element.querySelector('.element__like-button');
+    this.elementLikeButton = this._element.querySelector('.element__like-button');
     this._elementTrashButton = this._element.querySelector('.element__trash-button');
+    this.elementLikesCount = this._element.querySelector('.element__likes-count');
 
     this._setEventListeners();
 
     this._elementImage.src = this._image;
     this._elementImage.alt = this._title;
     this._elementTitle.textContent = this._title;
+    this.elementLikesCount.textContent = this.likes.length;
 
     return this._element;
   }
 
   _setEventListeners() {
-    this._elementLikeButton.addEventListener('click', () => {
-      this._likeCard();
-    });
-    this._elementTrashButton.addEventListener('click', () => {
-      this._removeCard();
-    });
     this._elementImage.addEventListener('click', () => {
       this._handleCardClick();
     });
+    this.elementLikeButton.addEventListener('click', () => {
+      this._handleLikeClick();
+      this.likeCard();
+    });
+    this._elementTrashButton.addEventListener('click', () => {
+      this._handleDeleteClick(this);
+    });
   }
 
-  _likeCard() {
-    this._element.querySelector('.element__like-button').classList.toggle('element__like-button_active');
+  likeCard() {
+    this.elementLikeButton.classList.toggle('element__like-button_active');
   }
 
-  _removeCard() {
+  removeCard() {
     this._element.remove();
     this._element = null;
   }

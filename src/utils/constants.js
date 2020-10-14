@@ -1,22 +1,33 @@
 // элементы секции profile
 const profile = document.querySelector('.profile');
-const avatar = profile.querySelector('.profile__avatar');
+const profileAvatar = profile.querySelector('.profile__avatar');
 const editAvatarButton = profile.querySelector('.profile__edit-button_type_avatar');
 const editProfileButton = profile.querySelector('.profile__edit-button_type_profile');
-const addButton = profile.querySelector('.profile__add-button');
+const addCardButton = profile.querySelector('.profile__add-button');
 
 // селекторы данных профиля
+const avatarSelector = '.profile__avatar';
 const profileTitleSelector = '.profile__title';
 const profileSubtitleSelector = '.profile__subtitle';
 
 // селекторы попапов
+const confirmPopupSelector = '.popup_type_confirm';
 const editAvatarPopupSelector = '.popup_type_edit-avatar';
 const editProfilePopupSelector = '.popup_type_edit-profile';
-const addPopupSelector = '.popup_type_add-card';
+const addCardPopupSelector = '.popup_type_add-card';
 const imagePopupSelector = '.popup_type_image';
 
+// выбор попапов
+const editAvatarPopup = document.querySelector(editAvatarPopupSelector);
+const editProfilePopup = document.querySelector(editProfilePopupSelector);
+const addCardPopup = document.querySelector(addCardPopupSelector);
+
+// выбор кнопок сохранения попапов
+const editAvatarSubmitButton = editAvatarPopup.querySelector('.popup__submit-button');
+const editProfileSubmitButton = editProfilePopup.querySelector('.popup__submit-button');
+const addCardSubmitButton = addCardPopup.querySelector('.popup__submit-button');
+
 // выбор инпутов форм
-const avatarInput = document.querySelector('.popup__input_type_avatar');
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_job');
 const placeInput = document.querySelector('.popup__input_type_place');
@@ -36,17 +47,21 @@ const configObject = {
 };
 
 export {
+  avatarSelector,
   profileTitleSelector,
   profileSubtitleSelector,
-  avatar,
+  profileAvatar,
   editAvatarButton,
   editProfileButton,
-  addButton,
+  addCardButton,
+  confirmPopupSelector,
   editAvatarPopupSelector,
   editProfilePopupSelector,
-  addPopupSelector,
+  addCardPopupSelector,
   imagePopupSelector,
-  avatarInput,
+  editAvatarSubmitButton,
+  editProfileSubmitButton,
+  addCardSubmitButton,
   nameInput,
   jobInput,
   placeInput,
