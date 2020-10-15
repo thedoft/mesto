@@ -53,7 +53,7 @@ const api = new Api({
 
 // функция вывода ошибки ответа сервера в консоль
 const consoleLogError = err => {
-  console.log(`Ошибка: ${err}`);
+  console.log(err);
 };
 
 // функция включения/отключения видимости загрузки данных

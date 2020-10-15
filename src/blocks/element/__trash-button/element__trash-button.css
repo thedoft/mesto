@@ -7,6 +7,8 @@
   background-image: url(../../../images/trash-button.svg);
   border: none;
   background-color: rgba(0, 0, 0, 0);
+  background-position: center;
+  background-repeat: no-repeat;
   opacity: 1;
   transition: opacity 1s ease;
 }
