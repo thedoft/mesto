@@ -6,7 +6,7 @@ const editProfileButton = profile.querySelector('.profile__edit-button_type_prof
 const addCardButton = profile.querySelector('.profile__add-button');
 
 // селекторы данных профиля
-const avatarSelector = '.profile__avatar';
+const profileAvatarSelector = '.profile__avatar';
 const profileTitleSelector = '.profile__title';
 const profileSubtitleSelector = '.profile__subtitle';
 
@@ -47,7 +47,7 @@ const configObject = {
 };
 
 export {
-  avatarSelector,
+  profileAvatarSelector,
   profileTitleSelector,
   profileSubtitleSelector,
   profileAvatar,
