@@ -222,7 +222,7 @@ Promise.all([
 .then((promisesArray) => {
   const userData = promisesArray[0];
   const userId = userData._id;
-  const cards = promisesArray[1];
+  const cards = promisesArray[1].reverse();
 
   userInfo.setUserInfo({
     avatar: userData.avatar,
