@@ -52,7 +52,7 @@ const createCard = ({ name, link, likes, _id, owner }, userId) => {
       imagePopup.open({ name, link });
     },
     handleLikeClick: () => {
-      if (card.elementLikeButton.classList.contains('element__like-button_active')) {
+      if (card.isLiked()) {
         const unlikeCard = api.unlikeCard({ _id: card._id });
 
         unlikeCard.then(cardInfo => {
