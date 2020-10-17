@@ -3,7 +3,6 @@ import {
   profileAvatarSelector,
   profileTitleSelector,
   profileSubtitleSelector,
-  profileAvatar,
   editAvatarButton,
   editProfileButton,
   addCardButton,
@@ -86,7 +85,7 @@ const createCard = ({ name, link, likes, _id, owner }, userId) => {
 
 // создание секции с карточками
 const cardList = new Section({
-  renderer: ({ name, link, likes, _id, owner }, userId) => {
+  renderer: ({ name, link, likes, _id, owner }) => {
     const card = createCard({ name, link, likes, _id, owner }, userId);
 
     cardList.addItem(card);
@@ -95,6 +94,7 @@ const cardList = new Section({
 
 // создание попапа с картинкой
 const imagePopup = new PopupWithImage({ popupSelector: imagePopupSelector });
+imagePopup.setEventListeners();
 
 //создание классов для попапов с формами
 const confirmPopup = new PopupWithConfirm({
@@ -111,6 +111,7 @@ const confirmPopup = new PopupWithConfirm({
     });
   }
 });
+confirmPopup.setEventListeners();
 
 const editAvatarPopup = new PopupWithForm({
   popupSelector: editAvatarPopupSelector,
@@ -131,6 +132,7 @@ const editAvatarPopup = new PopupWithForm({
     })
   }
 });
+editAvatarPopup.setEventListeners();
 
 const editProfilePopup = new PopupWithForm({
   popupSelector: editProfilePopupSelector,
@@ -154,6 +156,7 @@ const editProfilePopup = new PopupWithForm({
     })
   }
 });
+editProfilePopup.setEventListeners();
 
 const addCardPopup = new PopupWithForm({
   popupSelector: addCardPopupSelector,
@@ -165,7 +168,7 @@ const addCardPopup = new PopupWithForm({
       link: inputsValues['link-input']
     });
 
-    newCard.then(({ name, link, likes, _id, owner }, userId) => {
+    newCard.then(({ name, link, likes, _id, owner }) => {
       return createCard({ name, link, likes, _id, owner }, userId);
     })
     .then(cardElement => {
@@ -180,16 +183,20 @@ const addCardPopup = new PopupWithForm({
     });
   }
 });
+addCardPopup.setEventListeners();
 
 // выбор форм и добавление им валидаторов
 const editAvatarForm = document.forms['edit-avatar-form'];
 const editAvatarFormValidator = new FormValidator(configObject, editAvatarForm);
+editAvatarFormValidator.enableValidation();
 
 const editProfileForm = document.forms['edit-profile-form'];
 const editProfileFormValidator = new FormValidator(configObject, editProfileForm);
+editProfileFormValidator.enableValidation();
 
 const addCardForm = document.forms['add-card-form'];
 const addCardFormValidator = new FormValidator(configObject, addCardForm);
+addCardFormValidator.enableValidation();
 
 // создание класса Api
 const api = new Api({
@@ -198,6 +205,30 @@ const api = new Api({
     authorization: '9dad3ee9-138f-48bd-8014-b648376a609a',
     'Content-Type': 'application/json'
   }
+});
+
+// слушатели для кнопок редактирования аватара и профиля и кнопки добавления карточки
+editAvatarButton.addEventListener('click', () => {
+  editAvatarFormValidator.cleanErrors();
+  editAvatarPopup.open();
+});
+
+editProfileButton.addEventListener('click', () => {
+  const profileData = userInfo.getUserInfo();
+
+  nameInput.value = profileData.name;
+  jobInput.value = profileData.about;
+
+  editProfileFormValidator.cleanErrors();
+  editProfilePopup.open();
+});
+
+addCardButton.addEventListener('click', () => {
+  placeInput.value = '';
+  linkInput.value = '';
+
+  addCardFormValidator.cleanErrors();
+  addCardPopup.open();
 });
 
 // функция вывода ошибки ответа сервера в консоль
@@ -213,15 +244,16 @@ const renderLoading = (button, isLoading) => {
     button.textContent = 'Сохранить';
   }
 };
+let userId;
 
-// основная логика приложения
+// логика загрузки приложения
 Promise.all([
   api.getUserData(),
   api.getInitialCards()
 ])
 .then((promisesArray) => {
   const userData = promisesArray[0];
-  const userId = userData._id;
+  userId = userData._id;
   const cards = promisesArray[1].reverse();
 
   userInfo.setUserInfo({
@@ -231,45 +263,8 @@ Promise.all([
   });
 
   // отрисовка дефолтных карточек
-  cardList.renderItems(cards, userId);
-})
-.then(() => {
-  // слушатели для кнопок редактирования аватара и профиля и кнопки добавления карточки
-  editAvatarButton.addEventListener('click', () => {
-    editAvatarFormValidator.cleanErrors();
-    editAvatarPopup.open();
-  });
-
-  editProfileButton.addEventListener('click', () => {
-    const profileData = userInfo.getUserInfo();
-
-    nameInput.value = profileData.name;
-    jobInput.value = profileData.about;
-
-    editProfileFormValidator.cleanErrors();
-    editProfilePopup.open();
-  });
-
-  addCardButton.addEventListener('click', () => {
-    placeInput.value = '';
-    linkInput.value = '';
-
-    addCardFormValidator.cleanErrors();
-    addCardPopup.open();
-  });
-
-  // слушатели для попапов
-  confirmPopup.setEventListeners();
-  imagePopup.setEventListeners();
-  editAvatarPopup.setEventListeners();
-  editProfilePopup.setEventListeners();
-  addCardPopup.setEventListeners();
+  cardList.renderItems(cards);
 })
 .catch(err => {
   consoleLogError(err);
-})
-.finally(() => {
-  editAvatarFormValidator.enableValidation();
-  editProfileFormValidator.enableValidation();
-  addCardFormValidator.enableValidation();
 });

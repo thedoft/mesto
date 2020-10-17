@@ -1,6 +1,5 @@
 // элементы секции profile
 const profile = document.querySelector('.profile');
-const profileAvatar = profile.querySelector('.profile__avatar');
 const editAvatarButton = profile.querySelector('.profile__edit-button_type_avatar');
 const editProfileButton = profile.querySelector('.profile__edit-button_type_profile');
 const addCardButton = profile.querySelector('.profile__add-button');
@@ -50,7 +49,6 @@ export {
   profileAvatarSelector,
   profileTitleSelector,
   profileSubtitleSelector,
-  profileAvatar,
   editAvatarButton,
   editProfileButton,
   addCardButton,
