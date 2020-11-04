@@ -244,6 +244,7 @@ const renderLoading = (button, isLoading) => {
     button.textContent = 'Сохранить';
   }
 };
+
 let userId;
 
 // логика загрузки приложения
