@@ -22,6 +22,10 @@ import {
   cardSelector,
   configObject
 } from '../utils/constants.js';
+import {
+  consoleLogError,
+  renderLoading
+} from '../utils/utils.js';
 import Api from '../components/Api.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
@@ -30,6 +34,8 @@ import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import FormValidator from '../components/FormValidator.js';
+
+document.querySelector('.footer__copyright').textContent += ' ' + new Date().getFullYear() + ' Mesto Russia';
 
 // создание класса данных пользователя
 const userInfo = new UserInfo({
@@ -230,20 +236,6 @@ addCardButton.addEventListener('click', () => {
   addCardFormValidator.cleanErrors();
   addCardPopup.open();
 });
-
-// функция вывода ошибки ответа сервера в консоль
-const consoleLogError = err => {
-  console.log(err);
-};
-
-// функция включения/отключения видимости загрузки данных
-const renderLoading = (button, isLoading) => {
-  if (isLoading) {
-    button.textContent = 'Сохранение...';
-  } else {
-    button.textContent = 'Сохранить';
-  }
-};
 
 let userId;
 

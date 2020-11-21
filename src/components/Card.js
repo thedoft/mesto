@@ -42,10 +42,7 @@ export default class Card {
       this._elementTrashButton.remove();
     }
 
-    if (this._likes.some(like => {
-        return like._id === this._userId;
-      })
-    ) {
+    if (this._likes.some(like => like._id === this._userId)) {
       this.likeCard();
     }
 
